@@ -1,10 +1,18 @@
+export BIN="${HOME}/bin"
+export DOWNLOADS="${HOME}/Downloads"
+#
 export ALIAS="${HOME}/.alias"
 export ENVRC="${HOME}/.envrc"
 export VIMRC="${HOME}/.vimrc"
 export ZSHRC="${HOME}/.zshrc"
-export BIN="${HOME}/bin"
-export DOWNLOADS="${HOME}/Downloads"
-export GITHUB="/Users/shaughan/Documents/GitHub"
+#
+export GITHUB="${HOME}/Documents/GitHub"
+export _UNIXENV="${GITHUB}/UnixEnv"
+export _ALIAS="${_UNIXENV}/.alias"
+export _ENVRC="${_UNIXENV}/.envrc"
+export _VIMRC="${_UNIXENV}/.vimrc"
+export _ZSHRC="${_UNIXENV}/.zshrc"
+#
 
 ####################################################################################################
 
@@ -32,17 +40,21 @@ function sz {
 }
 
 function va {
-    vim ${ALIAS}
+    vim ${_ALIAS}
     sa
 }
 
 function ve {
-    vim ${ENVRC}
+    vim ${_ENVRC}
     se
 }
 
+function vvi {
+    vim ${_VIMRC}
+}
+
 function vz {
-    vim ${ZSHRC}
+    vim ${_ZSHRC}
     sz
 }
 

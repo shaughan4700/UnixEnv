@@ -2,6 +2,7 @@ set hlsearch
 set nows
 set number
 set sm
+set ts=4
 
 " ##################################################
 :map f :wq
