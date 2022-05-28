@@ -1,0 +1,200 @@
+export ALIAS="${HOME}/.alias"
+export ENVRC="${HOME}/.envrc"
+export VIMRC="${HOME}/.vimrc"
+export ZSHRC="${HOME}/.zshrc"
+export BIN="${HOME}/bin"
+export DOWNLOADS="${HOME}/Downloads"
+export GITHUB="/Users/shaughan/Documents/GitHub"
+
+####################################################################################################
+
+alias ls="ls -aF"
+alias ll="ls -aFl"
+alias cdb="cd .."
+alias cdbb="cd ../.."
+
+####################################################################################################
+
+function SU {
+    sudo su
+}
+
+function sa {
+    [ -r ${ALIAS} ] && . ${ALIAS}
+}
+
+function se {
+    [ -r ${ENVRC} ] && . ${ENVRC}
+}
+
+function sz {
+    [ -r ${ZSHRC} ] && . ${ZSHRC}
+}
+
+function va {
+    vim ${ALIAS}
+    sa
+}
+
+function ve {
+    vim ${ENVRC}
+    se
+}
+
+function vz {
+    vim ${ZSHRC}
+    sz
+}
+
+function v {
+    vim -R ${*}
+}
+
+function binR {
+    local f=${1}
+    local F=${BIN}/README.${f}
+    local BINR_template=${BIN}/README.TEMPLATE
+    if [ ! -e ${F} ] ; then
+        cp ${BINR_template} ${F}
+        chmod 755 ${F}
+    fi
+    vibinR ${f}
+}
+
+function vibin {
+    local f=${BIN}/${1}
+    if [ ! -e ${f} ] ; then
+        cat << EOT
+ERROR:  File ${f} DNE.
+EOT
+    else
+        vim ${f}
+    fi
+}
+
+function vibinR {
+    local f=${1}
+    vibin "README.${f}"
+}
+
+function lsR {
+    pushd . > /dev/null
+    cd ${BIN}
+    ls README.*
+    popd > /dev/null
+}
+
+function h {
+    history 0
+}
+
+function ht {
+    history -10
+}
+
+function htt {
+    history -100
+}
+
+function httt {
+    history -1000
+}
+
+function gh {
+    h | grep "${*}"
+}
+
+function bin {
+    cd ${BIN} && ls
+}
+
+function down {
+    cd ${DOWNLOADS} && ls
+}
+
+function gb {
+    git branch ${*}
+}
+
+function gco {
+    git checkout ${*}
+}
+
+function ggCommon {
+#   # cd ${FIXME}/git/...
+#   cd /Users/shaughan/Documents/GitHub/test-repo
+
+    local repository="${1}"
+
+    cd ${GITHUB}/${repository}
+    git status
+    git branch
+}
+
+function ggfvwm {
+    ggCommon fvwm
+}
+
+function ggtest {
+    ggCommon test-repo
+}
+
+function ggtest2 {
+    ggCommon Test
+}
+
+function ggu {
+#   cd /Users/shaughan/Documents/GitHub/UnixEnv
+#   cd ${GITHUB}/UnixEnv
+    ggCommon UnixEnv
+}
+
+function gl {
+    git log ${*}
+}
+
+function glo {
+    gl --oneline
+}
+
+function glme {
+    gl ${FIXME}
+}
+
+function glome {
+    gl --oneline ${FIXME}
+}
+
+function gs {
+    git status
+}
+
+function cellar {
+    local CELLAR="/usr/local/Cellar"
+    cat << EOT
+Brew installs ... here:  ${CELLAR}
+
+EOT
+    cd ${CELLAR}
+    ls
+}
+
+function tmpFile {
+    local myTempFile=`mktemp /tmp/FILE.XXXXXX`
+    cat << EOT
+Create temp file ${myTempFile}
+EOT
+}
+
+function tmpDir {
+    local myTempDir=`mktemp /tmp/DIR.XXXXXX`
+    cat << EOT
+Create temp directory ${myTempDir}
+EOT
+}
+
+function brewme {
+    local service=${*}
+    brew services restart ${service}
+    brew services info ${service}
+}
