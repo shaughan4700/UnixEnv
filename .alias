@@ -134,10 +134,8 @@ function gco {
     git checkout ${*}
 }
 
+####################################################################################################
 function ggCommon {
-#   # cd ${FIXME}/git/...
-#   cd /Users/shaughan/Documents/GitHub/test-repo
-
     local repository="${1}"
 
     cd ${GITHUB}/${repository}
@@ -158,11 +156,10 @@ function ggtest2 {
 }
 
 function ggu {
-#   cd /Users/shaughan/Documents/GitHub/UnixEnv
-#   cd ${GITHUB}/UnixEnv
     ggCommon UnixEnv
 }
 
+####################################################################################################
 function gl {
     git log ${*}
 }
